@@ -12,6 +12,15 @@ angular.module('starter.controllers', [])
   // Form data for the login modal
   $scope.loginData = {};
 
+  // Form data for filters
+  $scope.filters = {};
+
+  // Search by filters
+  $scope.getHappyHoursByFilters = function () {
+    console.loq("Filtering happy hours", $scope.filters);
+    
+  };
+
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -53,4 +62,5 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+
 });
