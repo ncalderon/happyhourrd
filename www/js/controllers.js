@@ -1,6 +1,8 @@
-angular.module('starter.controllers', [])
+angular.module('happyHourApp.Controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+
+// Main controller
+.controller('mainCtrl', function($scope, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -11,15 +13,6 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
-
-  // Form data for filters
-  $scope.filters = {};
-
-  // Search by filters
-  $scope.getHappyHoursByFilters = function () {
-    console.loq("Filtering happy hours", $scope.filters);
-    
-  };
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -50,17 +43,48 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+
+// HappyHoursController
+.controller('HappyHoursCtrl', function($stateParams, happyhours) {
+  var self = this;
+
+  // TODO: Call service to fill happyhours property
+  self.happyhours = happyHours.getNowHappyHours();
+  //happyhours.list
+
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+// FilterHappyHoursController
+.controller('FilterHappyHourCtrl', function($cope, $stateParams, happyhours) {
+  var self = this;
+
+  self.query = {};
+  
+  self.addCriteria = function (criteria){
+    self.query[criteria.name] = criteria.value;
+  };
+
+  selft.removeCriteria = function (criteria) {
+    delete selft.query[criteria.name];
+  };
+
+  /*$cope.$watch(
+    angular.bind(this, function(){
+        return this.query;
+      }
+    ), function (newVal, oldVal){
+        happyHours.query = this.newVal;
+    }
+  );*/
+
+})
+
+
+// HappyHourController
+.controller('HappyHourCtrl', function($stateParams, happyhours) {
+  var self = this;
+  
+  self.happyhour = {};
+  self.happyhour = happyhours.getById($stateParams.happyhourId);
 
 });

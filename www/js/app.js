@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('happyHourApp', ['ionic', 'happyHourApp.controllers', 'happyHourApp.filters', 'happyHourApp.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -25,11 +25,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
+    controller: 'mainCtrl',
+    controllerAs: 'main'
+
   })
 
   .state('app.search', {
@@ -49,25 +51,27 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.happyhours', {
+      url: '/happyhours',
       views: {
         'menuContent': {
           templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'HappyHoursCtrl',
+          controllerAs: "happyHours"
         }
       }
     })
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
+  .state('app.happyhour', {
+    url: '/happyhours/:happyhourId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/happyhours.html',
+        controller: 'happyHourCtrl',
+        controllerAs: "happyHour"
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/happyhours');
 });
