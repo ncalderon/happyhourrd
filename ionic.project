@@ -1,4 +1,10 @@
 {
-  "name": "Happy Hour RD",
-  "app_id": "happyhourrd"
+  "name": "Happy Hour RD"
+  ,"app_id": "happyhourrd"
+  ,"proxies": [
+    {
+      "path": "/v1"
+      ,"proxyUrl": "https://api.instagram.com/v1"
+    }
+  ]
 }

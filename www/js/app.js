@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('happyHourApp', ['ionic', 'happyHourApp.controllers', 'happyHourApp.filters', 'happyHourApp.services'])
+angular.module('happyHourApp', ['ionic', 'happyHourApp.controllers', 'happyHourApp.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -29,8 +29,8 @@ angular.module('happyHourApp', ['ionic', 'happyHourApp.controllers', 'happyHourA
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'mainCtrl',
-    controllerAs: 'main'
+    controller: 'MainCtrl',
+    controllerAs: 'Main'
 
   })
 
@@ -55,7 +55,7 @@ angular.module('happyHourApp', ['ionic', 'happyHourApp.controllers', 'happyHourA
       url: '/happyhours',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
+          templateUrl: 'templates/happyhours.html',
           controller: 'HappyHoursCtrl',
           controllerAs: "happyHours"
         }

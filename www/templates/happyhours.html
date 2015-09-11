@@ -1,6 +1,8 @@
 <ion-view view-title="Hot Happy Hours !!" >
 
-  <ion-content ng-controller="happyHoursCtrl happyhours">
+  <ion-content 
+     
+      >
     <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="refresh"
@@ -8,13 +10,13 @@
       
     </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="happyhour in happyhours" 
+      <ion-item ng-repeat="happyhour in happyhours.happyhours" 
       			class="item-thumbnail-left"
       			href="#/app/happyhours/{{happyhour.id}}"
       			>
       		<img ng-src={{happyhour.img}}>
-			<h2>{{happyhour.title}}</h2>  
-			<p>{{happyhour.place}}</p>      
+  			<h2>{{happyhour.title}}</h2>  
+  			<p>{{happyhour.place}}</p>      
       </ion-item>
     </ion-list>
   </ion-content>

@@ -1,8 +1,8 @@
-angular.module('happyHourApp.Controllers', [])
+angular.module('happyHourApp.controllers', [])
 
 
 // Main controller
-.controller('mainCtrl', function($scope, $ionicModal, $timeout) {
+.controller('MainCtrl', function($scope, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -44,16 +44,17 @@ angular.module('happyHourApp.Controllers', [])
 })
 
 
-// HappyHoursController
-.controller('HappyHoursCtrl', function($stateParams, happyhours) {
+// happyHoursController
+.controller('HappyHoursCtrl', function($stateParams, HappyHours) {
   var self = this;
 
   // TODO: Call service to fill happyhours property
-  self.happyhours = happyHours.getNowHappyHours();
+  self.happyhours = [];
+  // TODO: TRAER HAPPYHOURS DINAMICAMENTE
+  //self.happyhours = happyHours.getNowHappyHours();
   //happyhours.list
 
 })
-
 // FilterHappyHoursController
 .controller('FilterHappyHourCtrl', function($cope, $stateParams, happyhours) {
   var self = this;
