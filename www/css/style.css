@@ -1,1 +1,40 @@
 /* Empty. Add your own CSS if you like */
+.item-custom {
+	padding: 0px;
+}
+
+.button-custom{
+	font-size: 14px;
+}
+
+.item-checkbox-right .checkbox input,
+.item-checkbox-right .checkbox-icon {
+  float: right;
+}
+
+.item-checkbox.item-checkbox-right {
+  /*the default item padding*/
+  padding: 15px;
+}
+
+/* #search-input {
+  text-align: center;
+}
+
+#search-bar {
+  background: none;
+  position: absolute;
+  width: 100%;
+  top: 44px;
+  height: 40px;
+  z-index: 3;
+}
+#search-bar .item {
+  background: none;
+  border: none;
+}
+#content {
+  top: 44px;
+  padding-top: 45px;
+  padding-bottom: 20px;
+} */

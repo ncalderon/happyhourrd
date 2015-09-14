@@ -1,8 +1,8 @@
-angular.module('happyHourApp.controllers', [])
+angular.module('happyhourApp.controllers', [])
 
 
 // Main controller
-.controller('MainCtrl', function($scope, $ionicModal, $timeout) {
+.controller('MainCtrl', function($scope, $state, $stateParams , HappyhourService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -11,63 +11,24 @@ angular.module('happyHourApp.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
-})
+$scope.featuresConditionsList = [
+{ text: "Available for now", checked: true }
+,{ text: "Accepts credit cards", checked: true }
+,{ text: "Delivery", checked: true }
+,{ text: "Take-out", checked: true }    
+];
 
 
-// happyHoursController
-.controller('HappyHoursCtrl', function($stateParams, HappyHours) {
-  var self = this;
 
-  // TODO: Call service to fill happyhours property
-  self.happyhours = [];
-  // TODO: TRAER HAPPYHOURS DINAMICAMENTE
-  //self.happyhours = happyHours.getNowHappyHours();
-  //happyhours.list
+$scope.query = {};
 
-})
-// FilterHappyHoursController
-.controller('FilterHappyHourCtrl', function($cope, $stateParams, happyhours) {
-  var self = this;
+$scope.addCriteria = function (criteria){
+  self.query[criteria.name] = criteria.value;
+};
 
-  self.query = {};
-  
-  self.addCriteria = function (criteria){
-    self.query[criteria.name] = criteria.value;
-  };
-
-  selft.removeCriteria = function (criteria) {
-    delete selft.query[criteria.name];
-  };
+$scope.removeCriteria = function (criteria) {
+  delete selft.query[criteria.name];
+};
 
   /*$cope.$watch(
     angular.bind(this, function(){
@@ -76,16 +37,51 @@ angular.module('happyHourApp.controllers', [])
     ), function (newVal, oldVal){
         happyHours.query = this.newVal;
     }
-  );*/
-
+    );*/  
 })
 
 
+// happyHoursController
+.controller('HappyhoursCtrl', function($scope, $ionicScrollDelegate, HappyhourService, $state, $stateParams) {
+  'use strict';
+
+  // TODO: Call service to fill happyhours property
+  var location = {};
+
+
+  $scope.query = "";
+  $scope.happyhours = HappyhourService.getNowHappyhours(location);
+
+  $scope.doRefresh = function (){
+      $scope.happyhours = HappyhourService.getNowHappyhours(location);
+  };
+
+  $scope.search = function (item) {
+        return !!((item.name.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 || item.business_vanity_name.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1));
+  };
+
+  $scope.order = function (item){
+    return item.begin_date;
+  };
+
+  $scope.getSchedule = function (item){
+      return item.conditions.schedule.frequency;
+  }
+
+  $scope.scrollBottom = function() {
+    $ionicScrollDelegate.scrollBottom(true);
+  };
+
+  // TODO: TRAER HAPPYHOURS DINAMICAMENTE
+  //self.happyhours = happyHours.getNowHappyHours();
+  //happyhours.list
+
+
+})
+
 // HappyHourController
-.controller('HappyHourCtrl', function($stateParams, happyhours) {
-  var self = this;
+.controller('HappyhourCtrl', function($scope, $stateParams, $state, HappyhourService) {
   
-  self.happyhour = {};
-  self.happyhour = happyhours.getById($stateParams.happyhourId);
+  $scope.happyhour = HappyhourService.getHappyhourById(parseInt($stateParams.happyhourId));
 
 });

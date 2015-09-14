@@ -3,29 +3,41 @@
 *
 * Description
 */
-angular.module('happyHourApp.services', [])
+angular.module('happyhourApp.services', [])
 
-// Factory HappyHours
-.factory('HappyHours', function($http){
-	var happyhours= {};
+// Factory HappyHourService
+.factory('HappyhourService', function($http){
+	var self = {};
 
-	//happyhours.scope = scope;
+	//self.scope = scope;
 	// TODO: Set url of webservices
-	happyhours.url = "";
-	happyhours.list = [];
-	happyhours.getById = function (id){
-
+	//self.url = "";
+	self.items = [];
+	self.getHappyhoursCache = function () {
+		return items;
+	}
+	self.getHappyhourById = function (id){
+		for(var i = 0; i < self.items.length; i++){
+			if(id === self.items[i].id){
+				return self.items[i];
+			}
+		}
+		
 	};
-	happyhours.getNowHappyHours = function (location) {
-		http.get(happyhours.url).success(function (newList){
-			happyhours.list = newList;
+	self.getNowHappyhours = function (location) {
+		self.items = example_data;
+		return self.items;
+		/*http.get(self.url).success(function (newList){
+			self.list = newList;
 		}).finally(function () {
-			happyHours.scope.$broadcast("scroll.refreshComplete");
-		});
+			self.scope.$broadcast("scroll.refreshComplete");
+		});*/
 	};
-	happyhours.getByQuery = function (query){
-		happyhours.list = [];
+	self.getHappyhoursByQuery = function (query){
+		self.list = [];
 	};
-	return happyhours;	
+
+
+	return self;	
 })
 ;

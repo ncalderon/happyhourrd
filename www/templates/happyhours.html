@@ -1,23 +1,39 @@
-<ion-view view-title="Hot Happy Hours !!" >
+<ion-view view-title="!! Hot Happy Hours !!">
+    <!-- <div id="search-bar">
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper" id="search-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
+            </label>
+       </div>
+    </div> -->
+    <ion-header-bar class="bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios7-search placeholder-icon"></i>
+          <input type="search" placeholder="Search" ng-model="query">
+            </label>
+    </ion-header-bar>
 
-  <ion-content 
-     
-      >
-    <ion-refresher
-        pulling-text="Pull to refresh..."
-        on-refresh="refresh"
-      >
-      
-    </ion-refresher>
-    <ion-list>
-      <ion-item ng-repeat="happyhour in happyhours.happyhours" 
-      			class="item-thumbnail-left"
-      			href="#/app/happyhours/{{happyhour.id}}"
-      			>
-      		<img ng-src={{happyhour.img}}>
-  			<h2>{{happyhour.title}}</h2>  
-  			<p>{{happyhour.place}}</p>      
-      </ion-item>
-    </ion-list>
-  </ion-content>
+    <ion-nav-buttons side="right">
+      <a class="button" ng-click="scrollBottom()">
+        Scroll To Bottom
+      </a>
+    </ion-nav-buttons>
+
+
+    <ion-content 
+        
+        >       
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh">
+        </ion-refresher>
+        <ion-list>
+
+            <ion-item ng-repeat="happyhour in happyhours | filter: search | orderBy: order" class="item-thumbnail-left" href="#/app/happyhours/{{happyhour.id}}">
+                <img ng-src={{happyhour.img}}>
+                <h2>{{happyhour.name}}</h2>
+                <p>{{happyhour.description}}</p>
+                <p>{{happyhour.business_name}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>
