@@ -1,5 +1,4 @@
-var example_data = 
-[
+{"results": [
 {
    "id":2357,
    "business_id":481,
@@ -339,3 +338,4 @@ var example_data =
    }
 }
 ]
+}
