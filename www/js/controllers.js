@@ -2,7 +2,7 @@ angular.module('happyhourApp.controllers', [])
 
 
 // Main controller
-.controller('MainCtrl', function($scope, $state, $stateParams , HappyhourService) {
+.controller('MainCtrl', function($scope, $state, $stateParams , HappyhourFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -42,7 +42,7 @@ $scope.removeCriteria = function (criteria) {
 
 
 // happyHoursController
-.controller('HappyhoursCtrl', function($scope, $ionicScrollDelegate, HappyhourService, $state, $stateParams) {
+.controller('HappyhoursCtrl', function($scope, $ionicScrollDelegate, HappyhourFactory, $state, $stateParams) {
   'use strict';
 
   // TODO: Call service to fill happyhours property
@@ -50,10 +50,10 @@ $scope.removeCriteria = function (criteria) {
 
 
   $scope.query = "";
-  $scope.happyhours = HappyhourService.getNowHappyhours(location);
+  HappyhourFactory.getNowHappyhours($scope, location);
 
   $scope.doRefresh = function (){
-      $scope.happyhours = HappyhourService.getNowHappyhours(location);
+      $scope.happyhours = HappyhourFactory.getNowHappyhours(location);
   };
 
   $scope.search = function (item) {
@@ -80,8 +80,8 @@ $scope.removeCriteria = function (criteria) {
 })
 
 // HappyHourController
-.controller('HappyhourCtrl', function($scope, $stateParams, $state, HappyhourService) {
+.controller('HappyhourCtrl', function($scope, $stateParams, $state, HappyhourFactory) {
   
-  $scope.happyhour = HappyhourService.getHappyhourById(parseInt($stateParams.happyhourId));
+  $scope.happyhour = HappyhourFactory.getHappyhourById(parseInt($stateParams.happyhourId));
 
 });

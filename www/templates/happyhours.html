@@ -29,7 +29,7 @@
         <ion-list>
 
             <ion-item ng-repeat="happyhour in happyhours | filter: search | orderBy: order" class="item-thumbnail-left" href="#/app/happyhours/{{happyhour.id}}">
-                <img ng-src={{happyhour.img}}>
+                <img ng-src={{happyhour.public_image.url}}>
                 <h2>{{happyhour.name}}</h2>
                 <p>{{happyhour.description}}</p>
                 <p>{{happyhour.business_name}}</p>
